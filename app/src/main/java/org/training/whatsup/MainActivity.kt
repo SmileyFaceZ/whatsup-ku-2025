@@ -1,6 +1,7 @@
 package org.training.whatsup
 
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
@@ -23,26 +24,34 @@ class MainActivity : ComponentActivity() {
 //        enableEdgeToEdge()
         setContent {
             WhatsUpTheme {
-                Surface(modifier = Modifier.wrapContentSize(),
-                    color = MaterialTheme.colorScheme.background) {
+//                Surface(modifier = Modifier.wrapContentSize(),
+//                    color = MaterialTheme.colorScheme.background) {
+//                    Greeting(
+//                        name = "Andriod"
+//                        modifier = Modifier.padding(innerPadding)
+//                    )
+//                }
+                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
                     Greeting(
-                        name = "Andriod"
+                        name = "Andriod",
+                        modifier = Modifier.padding(innerPadding)
                     )
                 }
             }
         }
+        Toast.makeText(this, "Welcome to WhatsUp", Toast.LENGTH_LONG).show()
     }
 }
 
 @Composable
 fun Greeting(name: String, modifier: Modifier = Modifier) {
-//    Text(
-//        text = "Hello $name!",
-//        modifier = modifier
-//    )
-    Button(onClick = { }) {
-        Text(text = "Click Me")
-    }
+    Text(
+        text = "Hello $name!",
+        modifier = modifier
+    )
+//    Button(onClick = { }) {
+//        Text(text = "Click Me")
+//    }
 }
 
 @Preview(showBackground = true)
