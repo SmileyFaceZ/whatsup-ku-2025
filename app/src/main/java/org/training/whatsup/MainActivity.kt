@@ -20,26 +20,22 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
 import org.training.whatsup.ui.theme.WhatsUpTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-//        enableEdgeToEdge()
         setContent {
             WhatsUpTheme {
-//                Surface(modifier = Modifier.wrapContentSize(),
-//                    color = MaterialTheme.colorScheme.background) {
-//                    Greeting(
-//                        name = "Andriod"
-//                        modifier = Modifier.padding(innerPadding)
-//                    )
-//                }
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "Andriod",
-                        modifier = Modifier.padding(innerPadding)
-                    )
+                // A Surface container using the 'background'
+                Surface(
+                    modifier = Modifier.fillMaxSize(),
+                    color = MaterialTheme.colorScheme.background
+                ) {
+                    MainScreenWithBottomNavBar()
                 }
             }
         }
@@ -49,6 +45,7 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun MainScreenWithBottomNavBar() {
+    val navController = rememberNavController()
     Scaffold(
         bottomBar = {
             NavigationBar {
@@ -68,9 +65,16 @@ fun MainScreenWithBottomNavBar() {
             }
         }
     ) {
-        paddingValues -> Column(
+        paddingValues -> NavHost(
+            navController = navController,
+            startDestination = DestinationScreens.NearMe.route,
             modifier = Modifier.padding(paddingValues)
-        ) { }
+        ) {
+            // Navigation Builder
+            composable(route = DestinationScreens.NearMe.route) {
+                NearMeScreen()
+            }
+        }
     }
 }
 
