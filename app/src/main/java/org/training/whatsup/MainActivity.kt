@@ -18,8 +18,13 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
@@ -46,14 +51,26 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun MainScreenWithBottomNavBar() {
     val navController = rememberNavController()
+    var navSelectedItem by remember {
+        mutableStateOf(0)
+    }
     Scaffold(
         bottomBar = {
             NavigationBar {
                 WhatsUpNavItemInfo().getAllNavItems().forEachIndexed {
                     index,
                     itemInfo -> NavigationBarItem(
-                        selected = false,
-                        onClick = { /* TODO */ },
+                        selected = (index == navSelectedItem),
+                        onClick = {
+                            navSelectedItem = index
+                            navController.navigate(itemInfo.route) {
+                                popUpTo(navController.graph.findStartDestination().id) {
+                                    saveState = true
+                                }
+                                launchSingleTop = true
+                                restoreState = true
+                            }
+                        },
                         icon = {
                             Icon(imageVector = itemInfo.icon, contentDescription = itemInfo.label)
                         },
@@ -67,12 +84,18 @@ fun MainScreenWithBottomNavBar() {
     ) {
         paddingValues -> NavHost(
             navController = navController,
-            startDestination = DestinationScreens.NearMe.route,
+            startDestination = DestinationScreens.Highlight.route,
             modifier = Modifier.padding(paddingValues)
         ) {
             // Navigation Builder
+            composable(route = DestinationScreens.Highlight.route) {
+                HighlightScreen()
+            }
             composable(route = DestinationScreens.NearMe.route) {
                 NearMeScreen()
+            }
+            composable(route = DestinationScreens.MyEvents.route) {
+                MyEventsScreen()
             }
         }
     }
