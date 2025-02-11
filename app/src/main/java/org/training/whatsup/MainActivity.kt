@@ -28,13 +28,14 @@ import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import org.training.whatsup.customui.theme.AppTheme
 import org.training.whatsup.ui.theme.WhatsUpTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            WhatsUpTheme {
+            AppTheme {
                 // A Surface container using the 'background'
                 Surface(
                     modifier = Modifier.fillMaxSize(),

@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "189802707871",
+    "project_id": "whatsup-450511",
+    "storage_bucket": "whatsup-450511.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:189802707871:android:5956e70b83b11611be1baa",
+        "android_client_info": {
+          "package_name": "org.training.whatsup"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAOkmHIs1qDcBQCCBc5d_Yh8FqxN3w0z7M"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

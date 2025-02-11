@@ -46,6 +46,7 @@ import com.google.maps.android.compose.MapType
 import com.google.maps.android.compose.Marker
 import com.google.maps.android.compose.MarkerState
 import com.google.maps.android.compose.rememberCameraPositionState
+import org.training.whatsup.customui.theme.AppTheme
 import org.training.whatsup.ui.theme.WhatsUpTheme
 
 @Composable
@@ -95,7 +96,7 @@ fun NearMeScreen() {
     }
 
 
-    WhatsUpTheme {
+    AppTheme {
         Surface (
             modifier = Modifier
                 .fillMaxSize()
